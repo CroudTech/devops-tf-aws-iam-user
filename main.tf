@@ -5,7 +5,7 @@ resource "aws_iam_user" "self" {
 }
 
 resource "aws_iam_user_login_profile" "self" {
-    count = "${(var.create_profile == true ? 1 : 0) * length(var.usernames)}"
+    count = "${(var.create_profile ? 1 : 0) * length(var.usernames)}"
     user    = "${element(aws_iam_user.self.*.name, count.index)}"
     pgp_key = "${var.keybase_pgp_public_key}"
 }
