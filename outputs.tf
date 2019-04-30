@@ -1,7 +1,3 @@
-output "password" {
-  value = "${aws_iam_user_login_profile.self.*.encrypted_password}"
-}
-
 output "private-key" {
   value = "${tls_private_key.self.*.private_key_pem}"
 }

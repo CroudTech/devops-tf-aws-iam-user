@@ -4,11 +4,11 @@ resource "aws_iam_user" "self" {
     path          = "${var.iampath}"
 }
 
-# resource "aws_iam_user_login_profile" "self" {
-#     count = "${(var.create_profile == true ? 1 : 0) * length(var.usernames)}"
-#     user    = "${element(aws_iam_user.self.*.name, count.index)}"
-#     pgp_key = "${var.keybase_pgp_public_key}"
-# }
+resource "aws_iam_user_login_profile" "self" {
+    count = "${(var.create_profile == true ? 1 : 0) * length(var.usernames)}"
+    user    = "${element(aws_iam_user.self.*.name, count.index)}"
+    pgp_key = "${var.keybase_pgp_public_key}"
+}
 
 resource "aws_iam_access_key" "self" {
     count = "${length(var.usernames)}"
